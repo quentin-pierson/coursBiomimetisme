@@ -7,7 +7,6 @@ col_alive = (255, 255, 215)
 col_background = (10, 10, 40)
 col_grid = (30, 30, 60)
 # Main definition - constants
-menu_actions = {}
 dimx = 85
 dimy = 70
 
@@ -29,40 +28,6 @@ def update(surface, cur, sz):
 
     return nxt
 
-
-def main_menu():
-    os.system('clear')
-
-    print("Welcome,\n")
-    print("Please choose the menu you want to start:")
-    print("1. Glider Gun")
-    print("2. Random")
-    print("3. Diehard")
-    print("4. Boat")
-    print("5. R pentomino")
-    print("6. beacon")
-    print("7. acorn")
-    print("8. spaceship")
-    print("9. Block Switch Engine ")
-    print("\n0. Quit")
-    choice = input(" >>  ")
-    exec_menu(choice)
-    return
-
-
-# Execute menu
-def exec_menu(choice):
-    os.system('clear')
-    ch = choice.lower()
-    if ch == '':
-        menu_actions['main_menu']()
-    else:
-        try:
-            menu_actions[ch]()
-        except KeyError:
-            print("Invalid selection, please try again.\n")
-            menu_actions['main_menu']()
-    return
 
 
 def glider_gun():
@@ -168,22 +133,44 @@ def block_switch_engine():
     pos[1]:pos[1] + block_switch_engine.shape[1]] = block_switch_engine
     return cells
 
+def print_menu():
+    print("Welcome,\n")
+    print("Please choose the menu you want to start:")
+    print("1. Glider Gun")
+    print("2. Random")
+    print("3. Diehard")
+    print("4. Boat")
+    print("5. R pentomino")
+    print("6. beacon")
+    print("7. acorn")
+    print("8. spaceship")
+    print("9. Block Switch Engine ")
+    print("\n0. Quit")
 
-def init():
-    #return diehard()
-    #return random()
-    #return boat()
-    #return r_pentomino()
-    #return beacon()
-    #return acorn()
-    return spaceship()
-    #return block_switch_engine()
+def main_menu():
+    os.system('clear')
+    print_menu()
+    main(8)
+    return
 
+
+# Execute menu
+def exec_menu(choice):
+    os.system('clear')
+    ch = choice.lower()
+    if ch == '':
+        menu_actions['main_menu']()
+    else:
+        try:
+            menu_actions[ch]()
+        except KeyError:
+            print("Invalid selection, please try again.\n")
+            menu_actions['main_menu']()
+    return
 
 # Back to main menu
 def back():
     menu_actions['main_menu']()
-
 
 # Exit program
 def exit():
@@ -216,7 +203,7 @@ def main(cellsize):
     surface = pygame.display.set_mode((dimx * cellsize, dimy * cellsize))
     pygame.display.set_caption("Quentin Pierson Game of Life")
 
-    cells = init()
+    cells = spaceship()
 
     while True:
         for event in pygame.event.get():
@@ -230,5 +217,5 @@ def main(cellsize):
 
 
 if __name__ == "__main__":
-    main(8)
-    # main_menu()
+    #main(8)
+    main_menu()
