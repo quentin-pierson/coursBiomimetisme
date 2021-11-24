@@ -176,7 +176,6 @@ def back():
 def exit():
     sys.exit()
 
-
 # =======================
 #    MENUS DEFINITIONS
 # =======================
@@ -203,7 +202,7 @@ def main(cellsize):
     surface = pygame.display.set_mode((dimx * cellsize, dimy * cellsize))
     pygame.display.set_caption("Quentin Pierson Game of Life")
 
-    cells = spaceship()
+    cells = acorn() #change function for test other pattern 
 
     while True:
         for event in pygame.event.get():
